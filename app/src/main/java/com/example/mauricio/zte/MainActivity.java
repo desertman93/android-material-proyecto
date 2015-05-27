@@ -1,24 +1,27 @@
 package com.example.mauricio.zte;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Toast;
 
-
+import mauroxdev.activities.MapsActivity;
 import mauroxdev.fragments.HomeFragment;
 import mauroxdev.fragments.PlusOneFragment;
 import mauroxdev.fragments.newsFragment;
 
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends AppCompatActivity
         implements NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener {
 
     /**
@@ -26,10 +29,18 @@ public class MainActivity extends ActionBarActivity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
+    /*private String TAG;
+    private static final String STATE_TAG = "state_tag";*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+/*
+        if(savedInstanceState != null) {
+            TAG = savedInstanceState.getString(STATE_TAG);
+        }*/
+
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
@@ -42,6 +53,12 @@ public class MainActivity extends ActionBarActivity
         // populate the navigation drawer
         mNavigationDrawerFragment.setUserData("Mauricio Salustio", "mauro.xdev@gmail.com", BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
     }
+/*
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(STATE_TAG, TAG);
+        super.onSaveInstanceState(outState);
+    }*/
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -52,33 +69,49 @@ public class MainActivity extends ActionBarActivity
 
     private void vista(int position) {
         Fragment fragment = null;
+        String TAG = null;
         String title = getString(R.string.app_name);
+
         switch (position) {
             case 0:
                 fragment = new PlusOneFragment();
+                TAG = "plus";
                 title = "Home xd";
                 break;
             case 1:
                 fragment = new HomeFragment();
                 title = "klk 2";
+                TAG = "home";
                 break;
             case 2:
                 fragment = new newsFragment();
                 title = "klk 3";
+                TAG = "news";
+                break;
+            case 3:
+                startActivity(new Intent(this, MapsActivity.class));
+                title = "klk 3";
+                TAG = null;
                 break;
             default:
                 break;
         }
-/*
-        if (fragment != null) {*/
+
+        Fragment mFragment = getSupportFragmentManager().findFragmentByTag(TAG);
+
+        if(mFragment!= null){
+            fragment = mFragment;
+        }
+
+        if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, fragment).commit();
+            fragmentTransaction.replace(R.id.container, fragment, TAG).commit();
 
-/*
+
             // set the toolbar title
-            getSupportActionBar().setTitle(title);
-        }*/
+            //getSupportActionBar().setTitle(title);
+        }
     }
 
 

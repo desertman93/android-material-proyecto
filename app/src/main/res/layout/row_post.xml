@@ -1,47 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="16dp"
-    >
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cv"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardCornerRadius="2dp"
         >
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             >
 
             <ImageView
-                android:src="@drawable/avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/post_img"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
+                android:src="@drawable/avatar"
                 />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/titulo_post"
-                android:layout_toRightOf="@+id/post_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
+                android:layout_toRightOf="@+id/post_img"
+                android:text="Titulo Noticia"
+                android:textAppearance="?android:attr/textAppearanceListItem"
                 />
 
             <TextView
+                android:id="@+id/url_post"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/url_post"
-                android:layout_toRightOf="@+id/post_img"
-                android:layout_below="@+id/titulo_post"
-                />
+                android:layout_alignBottom="@+id/post_img"
+                android:layout_alignLeft="@+id/titulo_post"
+                android:layout_alignStart="@+id/titulo_post"
+                android:text="Detalles de la Noticia" />
 
         </RelativeLayout>
 

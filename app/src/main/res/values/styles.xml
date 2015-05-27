@@ -25,4 +25,24 @@
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
+
+    <style name="XYZAppTheme.Detail">
+        <item name="windowActionBarOverlay">true</item>
+        <item name="actionBarStyle">@style/ActionBar.Detail</item>
+    </style>
+
+    <style name="ActionBar.Detail" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/transparent_actionbar_background</item>
+        <item name="displayOptions">showHome|homeAsUp</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="XYZAppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/myPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/myPrimaryDarkColor</item>
+        <item name="colorAccent">@color/myAccentColor</item>
+        <item name="colorControlHighlight">?colorAccent</item>
+    </style>
+
+    <style name="XYZAppTheme" parent="XYZAppTheme.Base" />
 </resources>
